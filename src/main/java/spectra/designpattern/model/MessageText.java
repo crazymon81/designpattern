@@ -1,6 +1,6 @@
 package spectra.designpattern.model;
 
-public class MessageText extends MessageBase
+public class MessageText extends Message
 {
     private final String messageType = "TXT";
     

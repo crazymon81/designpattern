@@ -1,13 +1,13 @@
 package spectra.designpattern.model;
 
-public class MessageKnw extends MessageBase
+public class MessageKnw extends Message
 {
-    public MessageKnw(String text)
-    {
-        super(text);
-    }
-
     private final String messageType = "KNW";
+    
+    public MessageKnw(String knwUrl)
+    {
+        super(knwUrl);
+    }
 
     public String getMessageType()
     {

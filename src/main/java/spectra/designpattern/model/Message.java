@@ -1,8 +1,8 @@
 package spectra.designpattern.model;
 
-public abstract class MessageBase
+public abstract class Message
 {
-    protected abstract String getMessageType();
+    public abstract String getMessageType();
     
     private String ticketId;
 
@@ -12,7 +12,12 @@ public abstract class MessageBase
 
     private String message;
     
-    public MessageBase(String text)
+    public Message()
+    {
+        super();
+    }
+
+    public Message(String text)
     {
         this.message = text;
     }

@@ -1,12 +1,12 @@
 package spectra.designpattern.model;
 
-public class MessageImage extends MessageBase
+public class MessageImage extends Message
 {
     private final String messageType = "IMG";
     
-    public MessageImage(String text)
+    public MessageImage(String imageUrl)
     {
-        super(text);
+        super(imageUrl);
     }
 
     public String getMessageType()

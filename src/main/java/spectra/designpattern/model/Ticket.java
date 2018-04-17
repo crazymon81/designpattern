@@ -1,5 +1,7 @@
 package spectra.designpattern.model;
 
+import spectra.designpattern.factory.ChannelFactory;
+
 public class Ticket
 {
     private String ticketId;
@@ -15,7 +17,19 @@ public class Ticket
     private String endDate;
 
     private String ticketStatus;
+    
+    private Channel channel;
 
+    public Ticket()
+    {
+        
+    }
+    
+    public Ticket(String channelType)
+    {
+        this.channel = new ChannelFactory().createChannel(channelType);
+    }
+  
     public String getTicketId()
     {
         return ticketId;
@@ -84,6 +98,16 @@ public class Ticket
     public void setTicketStatus(String ticketStatus)
     {
         this.ticketStatus = ticketStatus;
+    }
+
+    public Channel getChannel()
+    {
+        return channel;
+    }
+
+    public void setChannel(Channel channel)
+    {
+        this.channel = channel;
     }
 
     @Override
