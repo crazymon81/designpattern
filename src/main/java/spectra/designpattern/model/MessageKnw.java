@@ -1,6 +1,6 @@
 package spectra.designpattern.model;
 
-public class MessageKnw extends Message
+public class MessageKnw extends MessageBase
 {
     public MessageKnw(String text)
     {

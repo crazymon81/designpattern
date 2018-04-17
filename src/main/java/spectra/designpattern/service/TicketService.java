@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import spectra.designpattern.Public;
-import spectra.designpattern.model.Message;
+import spectra.designpattern.model.MessageBase;
 import spectra.designpattern.model.MessageImage;
 import spectra.designpattern.model.MessageKnw;
 import spectra.designpattern.model.MessageText;
@@ -20,7 +20,7 @@ public class TicketService implements Runnable
 
     private Ticket ticket;
 
-    private List<Message> messages = new ArrayList<Message>();
+    private List<MessageBase> messages = new ArrayList<MessageBase>();
 
     public TicketService(String customerId)
     {
@@ -38,7 +38,7 @@ public class TicketService implements Runnable
     
     public void send(String sender, String messageType, String text)
     {
-        Message message = null;
+        MessageBase message = null;
         if (StringUtil.equals(Public.MESSAGE_TYPE_IMAGE, messageType))
         {
             message = new MessageImage(text);
@@ -61,7 +61,7 @@ public class TicketService implements Runnable
     private int getNextMessageSeq()
     {
         int maxSeq = 0;
-        for (Message message : messages)
+        for (MessageBase message : messages)
         {
             int seq = message.getSeq();
             if (seq >= maxSeq)
@@ -95,11 +95,11 @@ public class TicketService implements Runnable
     {
         System.out.println(ticket.toString());
 
-        Iterator<Message> iter = messages.iterator();
+        Iterator<MessageBase> iter = messages.iterator();
 
         while (iter.hasNext())
         {
-            Message message = iter.next();
+            MessageBase message = iter.next();
             System.out.println(message.toString());
         }
     }
