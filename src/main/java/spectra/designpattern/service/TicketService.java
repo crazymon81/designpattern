@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import spectra.designpattern.Public;
 import spectra.designpattern.model.Message;
+import spectra.designpattern.model.MessageImage;
+import spectra.designpattern.model.MessageKnw;
+import spectra.designpattern.model.MessageText;
 import spectra.designpattern.model.Ticket;
 import spectra.designpattern.util.DateUtil;
 import spectra.designpattern.util.Router;
+import spectra.designpattern.util.StringUtil;
 
 public class TicketService implements Runnable
 {
@@ -28,7 +33,24 @@ public class TicketService implements Runnable
 
     public void send(String sender, String text)
     {
-        Message message = new Message(text);
+        this.send(sender, Public.MESSAGE_TYPE_TEXT, text);
+    }
+    
+    public void send(String sender, String messageType, String text)
+    {
+        Message message = null;
+        if (StringUtil.equals(Public.MESSAGE_TYPE_IMAGE, messageType))
+        {
+            message = new MessageImage(text);
+        }
+        else if (StringUtil.equals(Public.MESSAGE_TYPE_KNW, messageType))
+        {
+            message = new MessageKnw(text);
+        }
+        else
+        {
+            message = new MessageText(text);
+        }
         message.setTicketId(ticket.getTicketId());
         message.setSeq(getNextMessageSeq());
         message.setUserId(sender);
@@ -88,21 +110,17 @@ public class TicketService implements Runnable
         {
             this.start();
             Thread.sleep(200);
-            this.send(ticket.getCustomerId(), ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 메시지");
+            this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 텍스트");
             Thread.sleep(200);
             this.accept(router.getRoutingAccount());
             Thread.sleep(200);
-            this.send(ticket.getAccountId(), ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 메시지");
+            this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 텍스트");
             Thread.sleep(200);
             
-            this.send(ticket.getCustomerId(), ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 메시지");
-            this.send(ticket.getAccountId(), ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 메시지");
-            this.send(ticket.getCustomerId(), ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 메시지");
-            this.send(ticket.getAccountId(), ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 메시지");
-            this.send(ticket.getCustomerId(), ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 메시지");
-            this.send(ticket.getAccountId(), ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 메시지");
-            this.send(ticket.getCustomerId(), ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 메시지");
-            this.send(ticket.getAccountId(), ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 메시지");
+            this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_IMAGE, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 이미지");
+            this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_IMAGE, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 이미지");
+            this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 텍스트");
+            this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_KNW, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 상담지식");
             
             this.end();
             Thread.sleep(200);

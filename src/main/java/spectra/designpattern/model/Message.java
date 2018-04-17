@@ -1,7 +1,9 @@
 package spectra.designpattern.model;
 
-public class Message
+public abstract class Message
 {
+    protected abstract String getMessageType();
+    
     private String ticketId;
 
     private int seq;
@@ -58,6 +60,5 @@ public class Message
     @Override
     public String toString()
     {
-        return "Message [ticketId=" + ticketId + ", seq=" + seq + ", userId=" + userId + ", message=" + message + "]";
-    }
+        return "Message [ticketId=" + ticketId + ", seq=" + seq + ", userId=" + userId + ", message=" + message + "]";    }
 }
