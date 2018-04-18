@@ -1,6 +1,8 @@
 package spectra.designpattern.model;
 
 import spectra.designpattern.factory.ChannelFactory;
+import spectra.designpattern.model.channel.Channel;
+import spectra.designpattern.model.message.Message;
 
 public class Ticket
 {

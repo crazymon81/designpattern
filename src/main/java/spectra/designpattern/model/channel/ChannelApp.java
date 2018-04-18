@@ -1,10 +1,10 @@
-package spectra.designpattern.model;
+package spectra.designpattern.model.channel;
 
 import spectra.designpattern.Public;
 
-public class ChannelKakao extends Channel
+public class ChannelApp extends Channel
 {
-    private final String channelType = Public.CHANNEL_TYPE_KAKAO;
+    private final String channelType = Public.CHANNEL_TYPE_APP;
     
     public String getChannelType()
     {

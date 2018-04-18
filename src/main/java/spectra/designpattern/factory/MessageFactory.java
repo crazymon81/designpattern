@@ -1,10 +1,10 @@
 package spectra.designpattern.factory;
 
 import spectra.designpattern.Public;
-import spectra.designpattern.model.Message;
-import spectra.designpattern.model.MessageImage;
-import spectra.designpattern.model.MessageKnw;
-import spectra.designpattern.model.MessageText;
+import spectra.designpattern.model.message.Message;
+import spectra.designpattern.model.message.MessageImage;
+import spectra.designpattern.model.message.MessageKnw;
+import spectra.designpattern.model.message.MessageText;
 import spectra.designpattern.util.StringUtil;
 
 public class MessageFactory

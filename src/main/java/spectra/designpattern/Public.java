@@ -11,4 +11,7 @@ public class Public
     public static String CHANNEL_TYPE_KAKAO = "KAKAO";
     public static String CHANNEL_TYPE_LINE = "LINE";
     public static String CHANNEL_TYPE_APP = "APP";
+    
+    public static String ROLE_ID_MANAGER = "ACCTMGR";
+    public static String ROLE_ID_AGENT = "ACCTAGT";
 }

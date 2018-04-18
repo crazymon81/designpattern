@@ -1,11 +1,11 @@
 package spectra.designpattern.factory;
 
 import spectra.designpattern.Public;
-import spectra.designpattern.model.Channel;
-import spectra.designpattern.model.ChannelApp;
-import spectra.designpattern.model.ChannelKakao;
-import spectra.designpattern.model.ChannelLine;
-import spectra.designpattern.model.ChannelPCWeb;
+import spectra.designpattern.model.channel.Channel;
+import spectra.designpattern.model.channel.ChannelApp;
+import spectra.designpattern.model.channel.ChannelKakao;
+import spectra.designpattern.model.channel.ChannelLine;
+import spectra.designpattern.model.channel.ChannelPCWeb;
 import spectra.designpattern.util.StringUtil;
 
 public class ChannelFactory

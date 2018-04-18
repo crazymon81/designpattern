@@ -1,16 +1,16 @@
-package spectra.designpattern.model;
+package spectra.designpattern.model.channel;
 
 import spectra.designpattern.Public;
 
-public class ChannelApp extends Channel
+public class ChannelLine extends Channel
 {
-    private final String channelType = Public.CHANNEL_TYPE_APP;
+    private final String channelType = Public.CHANNEL_TYPE_LINE;
     
     public String getChannelType()
     {
         return channelType;
     }
-
+    
     @Override
     public int push(String text)
     {

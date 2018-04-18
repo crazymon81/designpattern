@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import spectra.designpattern.model.Account;
+import spectra.designpattern.model.account.Account;
 
 public class Router
 {
@@ -16,6 +16,8 @@ public class Router
     
     private Map keyMap;
     
+    // 상담인입 가용여부 (상담인입차단 시 false)
+    private boolean routingStatus = true;
     
     /**
      * singleton 생성.
@@ -37,11 +39,21 @@ public class Router
         accounts = new ArrayList<Account>();
     }
     
+    public boolean isRoutingStatus()
+    {
+        return routingStatus;
+    }
+
+    public void setRoutingStatus(boolean routingStatus)
+    {
+        this.routingStatus = routingStatus;
+    }
+    
     public void login(Account account)
     {
         accounts.add(account);
         
-        System.out.println("상담원 로그인 : " + account.getAccountId() + ", " + account.getAccountName());
+        System.out.println("상담원(매니저) 로그인 - 아이디 : " + account.getAccountId() + ", 이름 : " + account.getAccountName() + ", 동시상담수 : " + account.getConcurrentAnswerNum());
     }
     
     public void logout(Account account)
@@ -85,11 +97,31 @@ public class Router
         return accounts.get(idx);
     }
     
-    public static void main(String[] args)
+    // 상담가능수 일괄 변경
+    public void changeAllConcurrentAnswerNum(int answernum)
     {
-        System.out.println(Router.getInstance().nextTicketId());
-        System.out.println(Router.getInstance().nextTicketId());
-        System.out.println(Router.getInstance().nextTicketId());
-        System.out.println(Router.getInstance().nextTicketId());
+        for (Account account : accounts)
+        {
+            account.setConcurrentAnswerNum(answernum);
+        }
+    }
+    
+    // 옵저버들(로그인 상담원) 에게 개인동시상담 가능수 변경 알림
+    public void notifyAllLoginAccount()
+    {
+        for (Account account : accounts)
+        {
+            account.notifyConcurrentAnswerNum();
+        }
+    }
+    
+    // 옵저버들(로그인 상담원) 에게 상담인입 차단 알림
+    public void notifyAllRoutingStatus()
+    {
+        for (Account account : accounts)
+        {
+            account.notifyRoutingStatus(this.routingStatus);
+        }
+        
     }
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 import spectra.designpattern.Public;
 import spectra.designpattern.factory.MessageFactory;
-import spectra.designpattern.model.Message;
 import spectra.designpattern.model.Ticket;
+import spectra.designpattern.model.message.Message;
 import spectra.designpattern.util.DateUtil;
 import spectra.designpattern.util.Router;
 
@@ -44,6 +44,8 @@ public class TicketService implements Runnable
         
         messages.add(message);
         
+        System.out.println("톡 메세지 전송 ["+ this.ticket.getTicketId() +"]" + message.toString());
+        
         this.ticket.push(message);
     }
 
@@ -65,6 +67,8 @@ public class TicketService implements Runnable
     {
         this.ticket.setTicketStatus("WAIT");
         this.ticket.setConnectDate(DateUtil.getCurrDateTimeStamp());
+        
+        System.out.println("톡 상담 시작 ["+ this.ticket.getTicketId() +"]");
     }
 
     public void accept(String accountId)
@@ -72,12 +76,16 @@ public class TicketService implements Runnable
         this.ticket.setAccountId(accountId);
         this.ticket.setTicketStatus("ING");
         this.ticket.setStartDate(DateUtil.getCurrDateTimeStamp());
+        
+        System.out.println("톡 상담 수락 ["+ this.ticket.getTicketId() +"]");
     }
 
     public void end()
     {
         this.ticket.setTicketStatus("END");
         this.ticket.setEndDate(DateUtil.getCurrDateTimeStamp());
+        
+        System.out.println("톡 상담 종료 ["+ this.ticket.getTicketId() +"]");
     }
 
     public void print()
@@ -105,9 +113,9 @@ public class TicketService implements Runnable
             this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_IMAGE, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 이미지");
             this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 텍스트");
             this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_KNW, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 상담지식");
-            
             this.end();
-            this.print();
+            
+//            this.print();
         }
         catch (Exception e)
         {

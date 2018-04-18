@@ -1,4 +1,4 @@
-package spectra.designpattern.model;
+package spectra.designpattern.model.channel;
 
 import spectra.designpattern.Public;
 

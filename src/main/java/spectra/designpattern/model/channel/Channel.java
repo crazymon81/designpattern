@@ -1,4 +1,4 @@
-package spectra.designpattern.model;
+package spectra.designpattern.model.channel;
 
 public abstract class Channel
 {
