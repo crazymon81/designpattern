@@ -115,4 +115,9 @@ public class Ticket
     {
         return "Ticket [ticketId=" + ticketId + ", accountId=" + accountId + ", customerId=" + customerId + ", connectDate=" + connectDate + ", startDate=" + startDate + ", endDate=" + endDate + ", ticketStatus=" + ticketStatus + "]";
     }
+
+    public void push(Message message)
+    {
+        this.getChannel().push(message.getMessage());
+    }
 }

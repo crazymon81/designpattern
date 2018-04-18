@@ -43,6 +43,8 @@ public class TicketService implements Runnable
         message.setUserId(sender);
         
         messages.add(message);
+        
+        this.ticket.push(message);
     }
 
     private int getNextMessageSeq()
@@ -97,7 +99,7 @@ public class TicketService implements Runnable
         {
             this.start();
             this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 텍스트");
-            this.accept(router.getRoutingAccount());
+            this.accept(router.getRoutingAccount().getAccountId());
             this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_TEXT, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 텍스트");
             this.send(ticket.getCustomerId(), Public.MESSAGE_TYPE_IMAGE, ticket.getTicketId() + ", " + ticket.getCustomerId() + "'s 이미지");
             this.send(ticket.getAccountId(), Public.MESSAGE_TYPE_IMAGE, ticket.getTicketId() + ", " + ticket.getAccountId() + "'s 이미지");
